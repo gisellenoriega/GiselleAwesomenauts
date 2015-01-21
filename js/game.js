@@ -35,7 +35,9 @@ var game = {
 
 	// Initialize melonJS and display a loading screen.
 	me.state.change(me.state.LOADING);
+	// loads two states then changes to the play screen
 },
+
 
 	// Run on game resources loaded.
 	"loaded" : function () {

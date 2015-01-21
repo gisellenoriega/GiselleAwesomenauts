@@ -7,6 +7,7 @@ game.PlayScreen = me.ScreenObject.extend({
 		game.data.score = 0;
 
 		me.levelDirector.loadLevel("level01")
+		// the level i'm going to load
 
 		// add our HUD to the game world
 		this.HUD = new game.HUD.Container();
@@ -22,3 +23,5 @@ game.PlayScreen = me.ScreenObject.extend({
 		me.game.world.removeChild(this.HUD);
 	}
 });
+
+// where the game starts
