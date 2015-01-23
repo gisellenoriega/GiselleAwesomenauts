@@ -35,12 +35,13 @@ var game = {
 
 	// Initialize melonJS and display a loading screen.
 	me.state.change(me.state.LOADING);
-	// loads two states then changes to the play screen
 },
-
 
 	// Run on game resources loaded.
 	"loaded" : function () {
+		me.pool.register("player", game.PlayerEntity, true);
+		// 
+
 		me.state.set(me.state.MENU, new game.TitleScreen());
 		me.state.set(me.state.PLAY, new game.PlayScreen());
 
