@@ -6,8 +6,14 @@ game.PlayScreen = me.ScreenObject.extend({
 		// reset the score
 		game.data.score = 0;
 
-		me.levelDirector.loadLevel("level01")
+
+		me.levelDirector.loadLevel("level01");
 		// the level i'm going to load
+		// levelDirector is telling it what to look at
+
+		var player = me.pool.pull("player", 0, 420, {});
+		me.game.world.addChild(player, 5);
+		// this adds the player to the screen
 
 		// add our HUD to the game world
 		this.HUD = new game.HUD.Container();
