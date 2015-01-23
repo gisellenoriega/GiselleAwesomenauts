@@ -22,9 +22,11 @@ game.PlayerEntity = me.Entity.extend({
 
 	},
 
-	update: function(){
+	update: function(delta){
 		if(me.input.isKeyPressed("right")){
-
+			// adds the pos. of my x by adding the velocity defined above in
+			// setVelocity() and multiplying it by me.timer.tick
+			// me.timer.tick makes the movement smooth
 			this.body.vel.x += this.body.accel.x * me.timer.tick;
 		}
 		else{
@@ -33,5 +35,7 @@ game.PlayerEntity = me.Entity.extend({
 
 		this.body.vel.update(delta);
 		return true;
+		// makes this all work.
+		// Delta is the change in time it happened
 	}
 });
