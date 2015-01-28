@@ -33,6 +33,8 @@ game.PlayerEntity = me.Entity.extend({
 			// me.timer.tick makes the movement smooth
 			this.body.vel.x += this.body.accel.x * me.timer.tick;
 			this.flipX(true);
+			// flips character
+			// animates the character
 		}
 		else{
 			this.body.vel.x = 0;
