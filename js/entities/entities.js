@@ -1,10 +1,3 @@
-// BASIC PLAYER CLASS
-// game.PlayerEntity both letters get to be capital because it it a class
-// init: function is our function constructor
-// init: function initializes player
-// this._super means reaching to the constructor of the entity
-// spriteheight and spritewidth are telling us what the size of the image is
-// new me.Rect is the rectangle the player can walk into
 game.PlayerEntity = me.Entity.extend({
 	init: function(x, y, settings) {
 			this._super(me.Entity, 'init', [x, y, {
@@ -59,7 +52,7 @@ game.PlayerEntity = me.Entity.extend({
 
 game.PlayerBaseEntity = me.Entity.extend({
 	init : function(x, y, settings) {
-		this._super(me.Entity, 'init' [x, y, {
+		this._super(me.Entity, 'init', [x, y, {
 			image: "tower",
 			width: 100,
 			height: 100,
@@ -73,13 +66,18 @@ game.PlayerBaseEntity = me.Entity.extend({
 		this.health = 10;
 		this.alwaysUpdate = true;
 		this.body.onCollision = this.onCollision.bind(this);
-
+		console.log("init");
 		this.type = "PlayerBaseEntity";
+
+		this.renderable.addAnimation("idle", [0]);
+		this.renderable.addAnimation("broken", [1]);
+		this.renderable.setCurrentAnimation("idle");
 	},
 
 	update:function(delta){
-		if(this.health<=0) {
+		if(this.health<=0){
 			this.broken = true;
+			this.renderable.setCurrentAnimation("broken");
 		}
 		this.body.update(delta);
 
@@ -92,8 +90,8 @@ game.PlayerBaseEntity = me.Entity.extend({
 });
 
 	game.EnemyBaseEntity = me.Entity.extend({
-	init : function(x, y, settings){
-		this._super(me.Entity, 'init' [x, y, {
+	init : function(x, y, settings) {
+		this._super(me.Entity, 'init', [x, y, {
 			image: "tower",
 			width: 100,
 			height: 100,
@@ -108,12 +106,17 @@ game.PlayerBaseEntity = me.Entity.extend({
 		this.alwaysUpdate = true;
 		this.body.onCollision = this.onCollision.bind(this);
 
-		this.type = "EnemyBaseEntity";
+		this.type = "EnemyBaseEntity"
+
+		this.renderable.addAnimation("idle", [0]);
+		this.renderable.addAnimation("broken", [1]);
+		this.renderable.setCurrentAnimation("idle");
 	},
 
 	update:function(delta){
 		if(this.health<=0) {
 			this.broken = true;
+			this.renderable.setCurrentAnimation("broken");
 		}
 		this.body.update(delta);
 
