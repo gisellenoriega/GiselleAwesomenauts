@@ -5,7 +5,23 @@ var game = {
 	// an object where to store game information
 	data : {
 		// score
-		score : 0
+		score : 0,
+		enemyBaseHealth: 10,
+		playerBaseHealth: 10,
+		enemyCreepHealth: 10,
+		playerHealth: 10,
+		enemyCreepAttack: 1,
+		playerAttack: 1,
+		// orcBaseDamage: 10,
+		// orcBaseHealth: 100,
+		// orcBaseSpeed: 3,
+		// orcBaseDefense: 0,
+		playerAttackTimer: 1000,
+		enemyCreepAttackTimer: 1000,
+		playerMoveSpeed: 5,
+		creepMoveSpeed: 5,
+		gameManager: "",
+		player: ""
 	},
 	
 	
@@ -40,6 +56,10 @@ var game = {
 	// Run on game resources loaded.
 	"loaded" : function () {
 		me.pool.register("player", game.PlayerEntity, true);
+		me.pool.register("PlayerBase", game.PlayerBaseEntity, true);
+		me.pool.register("EnemyBase", game.EnemyBaseEntity, true);
+		me.pool.register("EnemyCreep", game.EnemyCreep, true);
+		me.pool.register("GameManager", game.GameManager);
 		// POOL is a technique that might speed up the game if used properly
 
 		me.state.set(me.state.MENU, new game.TitleScreen());
@@ -47,6 +67,6 @@ var game = {
 		// these are two different screens 
 
 		// Start the game.
-		me.state.change(me.state.PLAY);
+		me.state.change(me.state.MENU);
 	}
 };
