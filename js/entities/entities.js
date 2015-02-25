@@ -55,37 +55,9 @@ game.PlayerEntity = me.Entity.extend({
 	update: function(delta){
 		this.now = new Date().getTime();
 
-		if(this.health <= 0){
-			this.dead = true;
-		}
+		this.dead = checkIfDead();
 
-			if(me.input.isKeyPressed("right")){
-			// adds the pos. of my x by adding the velocity defined above in
-			// setVelocity() and multiplying it by me.timer.tick
-			// me.timer.tick makes the movement smooth
-				this.body.vel.x += this.body.accel.x * me.timer.tick;
-				this.facing = "right";
-				this.now = new Date().getTime();
-				this.lastHit = this.now;
-				this.dead = false;
-				this.attack = game.data.playerAttack;
-				this.lastAttack = new Date().getTime();
-				this.flipX(true);
-			// flips character
-			// animates the character
-			}else if (me.input.isKeyPressed("left")) {
-					this.facing = "left";
-					this.body.vel.x -=this.body.accel.x * me.timer.tick;
-			        this.flipX(false);
-			}else{
-				this.body.vel.x = 0;
-			}
-
-			if(me.input.isKeyPressed("jump") && !this.body.jumping && !this.body.falling) {
-				this.body.jumping = true;
-				this.body.vel.y -= this.body.accel.y * me.timer.tick;
-			}
-
+		this.checkKeyPressedAndMoved();
 
 			if(me.input.isKeyPressed("attack")) {
 				if(!this.renderable.isCurrentAnimation("attack")){
@@ -113,6 +85,51 @@ game.PlayerEntity = me.Entity.extend({
 			return true;
 		},
 
+		checkIfDead: function() {
+			if(this.health <= 0){
+				return true;
+		}
+		return false;
+
+		},
+
+		checkKeyPressedAndMoved: function() {
+			if(me.input.isKeyPressed("right")){
+
+			}else if (me.input.isKeyPressed("left")) {
+				this.moveLeft();
+			}else{
+				this.body.vel.x = 0;
+			}
+
+			if(me.input.isKeyPressed("jump") && !this.body.jumping && !this.body.falling) {
+				this.jump();
+			}
+
+			this.attacking = me.input.isKeyPressed("attack")
+		},
+
+		moveRight: function(){
+			// adds the pos. of my x by adding the velocity defined above in
+			// setVelocity() and multiplying it by me.timer.tick
+			// me.timer.tick makes the movement smooth
+				this.body.vel.x += this.body.accel.x * me.timer.tick;
+				this.facing = "right";
+				this.flipX(true);
+			// flips character
+			// animates the character
+		},
+
+		moveLeft: function() {
+			this.facing = "left";
+			this.body.vel.x -=this.body.accel.x * me.timer.tick;
+			this.flipX(false);
+		},
+
+		jump: function() {
+			this.body.jumping = true;
+			this.body.vel.y -= this.body.accel.y * me.timer.tick;
+		}
 
 		loseHealth: function(damage) {
 			this.health = this.health - damage;
