@@ -43,6 +43,7 @@ game.PlayerEntity = me.Entity.extend({
 			// keeps track of which directiion your character is going
 		this.facing = "right";
 		this.dead = false;
+		this.attacking = false;
 	},
 
 	addAnimation: function() {
@@ -59,7 +60,7 @@ game.PlayerEntity = me.Entity.extend({
 
 		this.checkKeyPressedAndMoved();
 
-			if(me.input.isKeyPressed("attack")) {
+			if(this.attacking) {
 				if(!this.renderable.isCurrentAnimation("attack")){
 					// sets the current animation to attack and once that is over
 					// goes back to the idle animation
@@ -71,7 +72,7 @@ game.PlayerEntity = me.Entity.extend({
 				}
 			}
    			else if(this.body.vel.x !== 0 && !this.renderable.isCurrentAnimation("attack")) {
-			if(!this.renderable.isCurrentAnimation("walk")) {
+				if(!this.renderable.isCurrentAnimation("walk")) {
 				this.renderable.setCurrentAnimation("walk");
 				}
 			}else if(!this.renderable.isCurrentAnimation("attack")) {
@@ -93,7 +94,7 @@ game.PlayerEntity = me.Entity.extend({
 
 		},
 
-		checkKeyPressedAndMoved: function() {
+		checkKeyPressesAndMoved: function() {
 			if(me.input.isKeyPressed("right")){
 
 			}else if (me.input.isKeyPressed("left")) {
