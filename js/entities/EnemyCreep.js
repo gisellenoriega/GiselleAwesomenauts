@@ -85,7 +85,7 @@ game.EnemyCreep = me.Entity.extend({
 				this.lastHit = this.now;
 				// makes the player base call its loseHealth function and passes it
 				// damage of 1
-				response.b.loseHealth(gmae.data.enemyCreepAttack);
+				response.b.loseHealth(game.data.enemyCreepAttack);
 			}
 		}
 
