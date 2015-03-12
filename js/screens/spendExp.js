@@ -14,7 +14,12 @@ game.SpendExp = me.ScreenObject.extend({
 			},
 
 			draw: function(renderer){
-				this.font.draw(renderer.getContext(), "SPEND", this.pos.x, this.pos.y);
+				this.font.draw(renderer.getContext(), "PRESS F1-F4 TO BUY, F5 TO SKIP", this.pos.x, this.pos.y);
+				this.font.draw(renderer.getContext(), "CURRENT EXP: " + game.data.exp.toString(), this.pos.x + 100, this.pos.y + 50);
+				this.font.draw(renderer.getContext(), "F1: INCREASE GOLD PRODUCTION " + game.data.exp.toString(), this.pos.x + 200, this.pos.y + 100);
+				this.font.draw(renderer.getContext(), "F2: ADD STARTING GOLD " + game.data.exp.toString(), this.pos.x + 200, this.pos.y + 150);
+				this.font.draw(renderer.getContext(), "F3: INCREASE ATTACK DAMAGE: " + game.data.exp.toString(), this.pos.x + 200, this.pos.y + 200);
+				this.font.draw(renderer.getContext(), "F4: INCREASE STARTING HEALTH " + game.data.exp.toString(), this.pos.x + 200, this.pos.y + 250);
 			}
 
 		})));
